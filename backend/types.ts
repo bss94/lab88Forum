@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 
 export type ProductMutation = {
   category: string;
@@ -20,3 +20,13 @@ export interface UserMethods {
 }
 
 export type UserModel = Model<UserFields, {}, UserMethods>;
+
+export interface PostFields {
+  title: string;
+  author: mongoose.Schema.Types.ObjectId;
+  description: string;
+  image: string;
+  date: Date;
+}
+
+export type PostModel = Model<PostFields,{},{}>

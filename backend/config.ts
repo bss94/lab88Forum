@@ -19,7 +19,7 @@ const config = {
   rootPath,
   publicPath: path.join(rootPath, 'public'),
   corsOptions,
-  database: 'mongodb://localhost/shop',
+  database: 'mongodb://localhost/forum',
 };
 
 export default config;
