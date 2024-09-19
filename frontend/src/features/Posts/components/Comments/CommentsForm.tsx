@@ -4,6 +4,7 @@ import {LoadingButton} from '@mui/lab';
 import {TextField} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../../app/hooks.ts';
 import {selectCreatingComment, selectOnePost} from '../../postsSlice.ts';
+import {fetchPostComments} from '../../postsThunks.ts';
 
 const CommentsForm = () => {
   const dispatch = useAppDispatch();
@@ -18,22 +19,31 @@ const CommentsForm = () => {
   };
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
-
+    if (postId){
+      dispatch(fetchPostComments(postId))
+    }
   };
-
   return (
-    <Grid container direction="column" spacing={2} component="form" onSubmit={submitFormHandler}>
+    <Grid container
+          spacing={2}
+          alignItems="center"
+          component="form"
+          onSubmit={submitFormHandler}
+          sx={{my:2}}
+    >
       <Grid size={10}>
         <TextField
-          label="Message"
+          label="Comment"
           id="message"
           name="message"
           fullWidth
           value={message}
+          required
           onChange={inputChangeHandler}/>
       </Grid>
-      <Grid size={2}>
+      <Grid size={2} >
         <LoadingButton
+          fullWidth
           type="submit"
           loading={sending}
           loadingPosition="center"

@@ -31,10 +31,12 @@ const Posts = () => {
             >
               <Paper elevation={4}>
                 <PostItem
-                  author={post.author}
+                  author={post.author.username}
                   title={post.title}
                   id={post._id}
                   date={post.date}
+                  image={post.image}
+                  comments={post.comments}
                 />
               </Paper>
             </Grow>

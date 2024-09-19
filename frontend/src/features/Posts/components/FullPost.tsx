@@ -1,11 +1,11 @@
 import React from 'react';
-import {Card, CardContent, CardMedia, Typography} from '@mui/material';
+import {Card, CardMedia, Typography} from '@mui/material';
 import {API_URL, setDate} from '../../../constants.ts';
-import {Post} from '../../../types.ts';
+import {OnePost} from '../../../types.ts';
 import Grid from '@mui/material/Grid2';
 
 interface Props {
-  post: Post;
+  post: OnePost;
 }
 
 const FullPost: React.FC<Props> = ({post}) => {
@@ -26,23 +26,25 @@ const FullPost: React.FC<Props> = ({post}) => {
     );
   }
   return (
-    <Card variant="outlined" sx={{m: 2, p: 2}}>
-      <Grid container spacing={2} direction="row" alignItems="center">
+    <Card variant="outlined" sx={{m: 2, p: 2, width: '100%'}}>
+      <Grid container spacing={2} alignItems="center">
         {imageField}
         <Grid size={!post.image ? 12 : 6}>
           <Typography variant="h4">
             {post.title}
           </Typography>
           <Typography sx={{fontSize: 12}} color="text.secondary">
-            {setDate(post.date)} by <strong>{post.author}</strong>
+            {setDate(post.date)} by <strong>{post.author.username}</strong>
           </Typography>
         </Grid>
+        {post.description && (
+          <Grid size={12}>
+            <Typography sx={{fontSize: 16}} color="text.secondary">
+              {post.description}
+            </Typography>
+          </Grid>
+        )}
       </Grid>
-      <CardContent sx={{width: '100%'}}>
-        <Typography sx={{fontSize: 16}} color="text.secondary">
-          {post.description}
-        </Typography>
-      </CardContent>
     </Card>
   );
 };

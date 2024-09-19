@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import Grid from '@mui/material/Grid2';
 import AnonymousMenu from './AnonymousMenu.tsx';
 import UserMenu from './UserMenu.tsx';
+import {useAppSelector} from '../../app/hooks.ts';
+import {selectUser} from '../../features/Users/usersSlice.ts';
 
 const StyledLink = styled(Link)({
   color: 'inherit',
@@ -13,7 +15,7 @@ const StyledLink = styled(Link)({
 });
 
 const AppToolbar = () => {
-  const user = null;
+  const user=useAppSelector(selectUser);
 
   return (
     <AppBar color='warning' position="sticky" sx={{mb: 2,}}>

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {IComment, Post} from '../../types.ts';
+import {IComment, OnePostResponse, Post} from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 
 export const fetchPosts = createAsyncThunk<Post[]>(
@@ -9,10 +9,10 @@ export const fetchPosts = createAsyncThunk<Post[]>(
     return posts;
   }
 );
-export const fetchOnePost = createAsyncThunk<Post, string>(
+export const fetchOnePost = createAsyncThunk<OnePostResponse, string>(
   'posts/fetchOnePost',
   async (id) => {
-    const {data: post} = await axiosApi.get<Post>(`/posts/${id}`);
+    const {data: post} = await axiosApi.get<OnePostResponse>(`/posts/${id}`);
     return post;
   }
 );

@@ -1,12 +1,13 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {IComment, Post} from '../../types.ts';
+import {IComment, OnePost, Post} from '../../types.ts';
+import {fetchOnePost, fetchPostComments, fetchPosts} from './postsThunks.ts';
 
 
 export interface PostState {
   posts: Post[];
   fetchingPosts: boolean;
   creatingPost: boolean;
-  onePost: Post | null;
+  onePost: OnePost | null;
   fetchOnePost: boolean;
   comments: IComment[];
   fetchComments: boolean;
@@ -33,7 +34,38 @@ export const postsSlice = createSlice({
       state.comments = [];
     }
   },
-  extraReducers: () => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchPosts.pending, (state) => {
+      state.fetchingPosts = true;
+    })
+      .addCase(fetchPosts.rejected, (state) => {
+        state.fetchingPosts = false;
+      })
+      .addCase(fetchPosts.fulfilled, (state, {payload: posts}) => {
+        state.posts = posts;
+        state.fetchingPosts = false;
+      });
+    builder.addCase(fetchOnePost.pending, (state) => {
+      state.fetchOnePost = true;
+    })
+      .addCase(fetchOnePost.rejected, (state) => {
+        state.fetchOnePost = false;
+      })
+      .addCase(fetchOnePost.fulfilled, (state, {payload: onePost}) => {
+        state.onePost = onePost.post;
+        state.comments = onePost.comments;
+        state.fetchOnePost = false;
+      });
+    builder.addCase(fetchPostComments.pending, (state) => {
+      state.fetchComments = true;
+    })
+      .addCase(fetchPostComments.rejected, (state) => {
+        state.fetchComments = false;
+      })
+      .addCase(fetchPostComments.fulfilled, (state, {payload: comments}) => {
+        state.comments = comments;
+        state.fetchComments = false;
+      });
   },
   selectors: {
     selectPosts: (state) => state.posts,

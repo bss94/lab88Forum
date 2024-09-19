@@ -30,19 +30,39 @@ export interface GlobalError {
   error: string;
 }
 
+export interface Author {
+  _id: string;
+  username: string;
+}
+
 export interface Post {
   _id: string;
-  author: string;
+  author: Author;
+  title: string;
+  image: string | null;
+  date: string;
+  comments: number;
+}
+
+export interface OnePost {
+  _id: string;
+  author: Author;
   title: string;
   description?: string;
-  image?: string;
+  image: string | null;
   date: string;
 }
 
+
 export interface IComment {
   _id: string;
-  author: string;
+  author: Author;
   postId: string;
   message: string;
   date: string;
+}
+
+export interface OnePostResponse {
+  post: OnePost;
+  comments: IComment[];
 }
