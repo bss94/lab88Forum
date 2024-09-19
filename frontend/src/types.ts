@@ -57,9 +57,14 @@ export interface OnePost {
 export interface IComment {
   _id: string;
   author: Author;
-  postId: string;
+  post: string;
   message: string;
   date: string;
+}
+
+export interface ICommentMutation{
+  post:string;
+  message:string;
 }
 
 export interface OnePostResponse {

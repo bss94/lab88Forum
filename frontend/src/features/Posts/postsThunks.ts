@@ -1,6 +1,7 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {IComment, OnePostResponse, Post} from '../../types.ts';
+import {IComment, ICommentMutation, OnePostResponse, Post} from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
+import {RootState} from '../../app/store.ts';
 
 export const fetchPosts = createAsyncThunk<Post[]>(
   'posts/fetchPosts',
@@ -17,9 +18,17 @@ export const fetchOnePost = createAsyncThunk<OnePostResponse, string>(
   }
 );
 export const fetchPostComments = createAsyncThunk<IComment[], string>(
-  'posts/fetchPostComments',
+  'comments/fetchPostComments',
   async (postId) => {
     const {data: comments} = await axiosApi.get<IComment[]>(`/comments/${postId}`);
     return comments;
   }
 );
+
+export const createNewComment = createAsyncThunk<void,ICommentMutation,{ state: RootState }>(
+  'comments/createNewComment',
+  async (commentMutation, {getState}) => {
+    const token = getState().users.user?.token;
+    await axiosApi.post<IComment>('/comments', commentMutation, {headers: {'Authorization': `Bearer ${token}`}});
+  }
+)

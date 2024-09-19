@@ -4,7 +4,8 @@ import {LoadingButton} from '@mui/lab';
 import {TextField} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../../app/hooks.ts';
 import {selectCreatingComment, selectOnePost} from '../../postsSlice.ts';
-import {fetchPostComments} from '../../postsThunks.ts';
+import {createNewComment, fetchPostComments} from '../../postsThunks.ts';
+import {ICommentMutation} from '../../../../types.ts';
 
 const CommentsForm = () => {
   const dispatch = useAppDispatch();
@@ -20,6 +21,12 @@ const CommentsForm = () => {
   const submitFormHandler = async (event: React.FormEvent) => {
     event.preventDefault();
     if (postId){
+      const commentMutation:ICommentMutation={
+        post:postId,
+        message:message,
+      }
+      await dispatch(createNewComment(commentMutation));
+      setMessage('');
       dispatch(fetchPostComments(postId))
     }
   };

@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {IComment, OnePost, Post} from '../../types.ts';
-import {fetchOnePost, fetchPostComments, fetchPosts} from './postsThunks.ts';
+import {createNewComment, fetchOnePost, fetchPostComments, fetchPosts} from './postsThunks.ts';
 
 
 export interface PostState {
@@ -65,6 +65,15 @@ export const postsSlice = createSlice({
       .addCase(fetchPostComments.fulfilled, (state, {payload: comments}) => {
         state.comments = comments;
         state.fetchComments = false;
+      });
+    builder.addCase(createNewComment.pending, (state) => {
+      state.creatingComment = true;
+    })
+      .addCase(createNewComment.rejected, (state) => {
+        state.creatingComment = false;
+      })
+      .addCase(createNewComment.fulfilled, (state) => {
+        state.creatingComment = false;
       });
   },
   selectors: {

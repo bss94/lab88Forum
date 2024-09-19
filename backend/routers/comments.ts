@@ -22,14 +22,14 @@ commentsRouter.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
-commentsRouter.post('/:id', auth, async (req: RequestWithUser, res, next) => {
+commentsRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
   try {
     if (!req.user) {
       return res.status(401).send({error: 'Unauthorized'});
     }
     const commentsData = {
       author: req.user._id,
-      post: req.params.id,
+      post: req.body.post,
       message: req.body.message,
       date: new Date(),
     };
