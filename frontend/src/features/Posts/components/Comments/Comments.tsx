@@ -15,6 +15,7 @@ const Comments = () => {
       <Typography variant="h4" sx={{my: 1}}>
         Comments
       </Typography>
+
       {!user
         ? <Alert severity="info" sx={{my: 3}}>
           You must be logged to create comments!

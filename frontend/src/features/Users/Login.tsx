@@ -38,7 +38,7 @@ const Login = () => {
   return (
     <Box
       sx={{
-        mt: 1,
+        mt: 2,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -82,7 +82,7 @@ const Login = () => {
           loadingPosition="start"
           startIcon={<LoginIcon/>}
           fullWidth
-          color='warning'
+          color="warning"
           variant="contained"
           sx={{mt: 3, mb: 2}}
         >

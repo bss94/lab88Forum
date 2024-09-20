@@ -6,14 +6,15 @@ import auth, {RequestWithUser} from '../middleware/auth';
 
 const commentsRouter = express.Router();
 
-commentsRouter.get('/', async (req, res, next) => {
-  try {
-    const comment = await Comment.find().populate('author', 'username').sort({date: -1});
-    return res.send(comment);
-  } catch (error) {
-    next(error);
-  }
-});
+// commentsRouter.get('/', async (req, res, next) => {
+//   try {
+//     const comment = await Comment.find().populate('author', 'username').sort({date: -1});
+//     return res.send(comment);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
 commentsRouter.get('/:id', async (req, res, next) => {
   try {
     const comment = await Comment.find({post: req.params.id}).populate('author', 'username').sort({date: -1});
@@ -22,6 +23,7 @@ commentsRouter.get('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
 commentsRouter.post('/', auth, async (req: RequestWithUser, res, next) => {
   try {
     if (!req.user) {

@@ -1,5 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
-import {IComment, ICommentMutation, OnePostResponse, Post} from '../../types.ts';
+import {IComment, ICommentMutation, OnePostResponse, Post, PostMutation} from '../../types.ts';
 import axiosApi from '../../axiosApi.ts';
 import {RootState} from '../../app/store.ts';
 
@@ -25,10 +25,25 @@ export const fetchPostComments = createAsyncThunk<IComment[], string>(
   }
 );
 
-export const createNewComment = createAsyncThunk<void,ICommentMutation,{ state: RootState }>(
+export const createNewComment = createAsyncThunk<void, ICommentMutation, { state: RootState }>(
   'comments/createNewComment',
   async (commentMutation, {getState}) => {
     const token = getState().users.user?.token;
     await axiosApi.post<IComment>('/comments', commentMutation, {headers: {'Authorization': `Bearer ${token}`}});
   }
-)
+);
+export const createNewPost = createAsyncThunk<void, PostMutation, { state: RootState }>(
+  'posts/createNewPost',
+  async (postMutation, {getState}) => {
+    const token = getState().users.user?.token;
+    const formData = new FormData();
+    const keys = Object.keys(postMutation) as (keyof PostMutation)[];
+    keys.forEach((key) => {
+      const value = postMutation[key];
+      if (value !== null) {
+        formData.append(key, value);
+      }
+    });
+    await axiosApi.post<Post>('/posts', formData, {headers: {'Authorization': `Bearer ${token}`}});
+  }
+);

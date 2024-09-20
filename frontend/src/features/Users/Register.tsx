@@ -45,7 +45,7 @@ const Register = () => {
   return (
     <Box
       sx={{
-        mt: 1,
+        mt: 2,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -57,7 +57,7 @@ const Register = () => {
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
-      <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3, width:306}}>
+      <Box component="form" noValidate onSubmit={submitFormHandler} sx={{mt: 3, width: 306}}>
         <Grid container direction="column" spacing={2}>
           <Grid size={12}>
             <TextField
@@ -93,7 +93,7 @@ const Register = () => {
           loadingPosition="start"
           startIcon={<LoginIcon/>}
           fullWidth
-          color='warning'
+          color="warning"
           variant="contained"
           sx={{mt: 3, mb: 2}}
         >

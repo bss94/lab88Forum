@@ -3,12 +3,12 @@ import {CircularProgress, Grow, Paper, Typography} from '@mui/material';
 import PostItem from './components/PostItem.tsx';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import {selectFetchingPosts, selectPosts} from './postsSlice.ts';
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import {fetchPosts} from './postsThunks.ts';
 
 const Posts = () => {
   const dispatch = useAppDispatch();
-  const fetching = useAppSelector(selectFetchingPosts)
+  const fetching = useAppSelector(selectFetchingPosts);
   const posts = useAppSelector(selectPosts);
   useEffect(() => {
     dispatch(fetchPosts());
@@ -17,7 +17,7 @@ const Posts = () => {
   return (
     <Grid container spacing={2}>
       <Grid size={12}>
-        <Typography component="h1" variant="h5" sx={{my:4}}>Posts</Typography>
+        <Typography component="h1" variant="h5" sx={{my: 4}}>Posts</Typography>
       </Grid>
       {fetching && <Grid size={12} sx={{textAlign: 'center'}}> <CircularProgress color="warning"/> </Grid>}
 

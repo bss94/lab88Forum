@@ -6,7 +6,7 @@ import UserMenu from './UserMenu.tsx';
 import {useAppSelector} from '../../app/hooks.ts';
 import {selectUser} from '../../features/Users/usersSlice.ts';
 
-const StyledLink = styled(Link)({
+export const StyledLink = styled(Link)({
   color: 'inherit',
   textDecoration: 'none',
   '&:hover': {
@@ -15,10 +15,10 @@ const StyledLink = styled(Link)({
 });
 
 const AppToolbar = () => {
-  const user=useAppSelector(selectUser);
+  const user = useAppSelector(selectUser);
 
   return (
-    <AppBar color='warning' position="sticky" sx={{mb: 2,}}>
+    <AppBar color="warning" position="sticky" sx={{mb: 2,}}>
       <Toolbar>
         <Typography variant="h6" component="div" sx={{flexGrow: 1}}>
           <StyledLink to="/">4chan</StyledLink>

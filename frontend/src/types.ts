@@ -53,6 +53,11 @@ export interface OnePost {
   date: string;
 }
 
+export interface PostMutation {
+  title: string;
+  description: string;
+  image: string | null;
+}
 
 export interface IComment {
   _id: string;
@@ -62,9 +67,9 @@ export interface IComment {
   date: string;
 }
 
-export interface ICommentMutation{
-  post:string;
-  message:string;
+export interface ICommentMutation {
+  post: string;
+  message: string;
 }
 
 export interface OnePostResponse {

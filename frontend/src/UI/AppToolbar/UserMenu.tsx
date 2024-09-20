@@ -4,6 +4,7 @@ import Grid from '@mui/material/Grid2';
 import {User} from '../../types.ts';
 import {useAppDispatch} from '../../app/hooks.ts';
 import {logout} from '../../features/Users/usersThunks.ts';
+import {StyledLink} from './AppToolbar.tsx';
 
 
 interface Props {
@@ -31,7 +32,8 @@ const UserMenu: React.FC<Props> = ({user}) => {
     <Grid>
       <Button onClick={handleClick} color={'inherit'}>Hello, {user.username}!</Button>
       <Menu open={isOpen} anchorEl={anchorEl} keepMounted onClose={handleClose}>
-        <MenuItem onClick={handleLogout} >Logout</MenuItem>
+        <MenuItem><StyledLink to="/new-post">Add new post</StyledLink></MenuItem>
+        <MenuItem onClick={handleLogout}>Logout</MenuItem>
       </Menu>
     </Grid>
   );

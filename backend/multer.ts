@@ -7,7 +7,7 @@ import {randomUUID} from 'node:crypto';
 const imageStorage = multer.diskStorage({
   destination: async (req, file, cb) => {
     const destDir = path.join(config.publicPath, 'images');
-    await fs.mkdir(destDir, { recursive: true });
+    await fs.mkdir(destDir, {recursive: true});
     cb(null, config.publicPath); // /users/tsyganov/projects/js-25/shop-api/public
   },
   filename: (req, file, cb) => {

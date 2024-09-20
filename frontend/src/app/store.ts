@@ -8,12 +8,11 @@ const userPersistConfig = {
   key: 'forumApp:users',
   storage,
   whitelist: ['user'],
-
 };
 
 const rootReducer = combineReducers({
   users: persistReducer(userPersistConfig, usersReducer),
-  posts:postsReducers,
+  posts: postsReducers,
 });
 
 export const store = configureStore({

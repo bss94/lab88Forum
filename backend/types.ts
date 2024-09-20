@@ -1,4 +1,4 @@
-import mongoose, { Model } from 'mongoose';
+import mongoose, {Model} from 'mongoose';
 
 export type ProductMutation = {
   category: string;
@@ -16,6 +16,7 @@ export interface UserFields {
 
 export interface UserMethods {
   checkPassword(password: string): Promise<boolean>;
+
   generateToken(): void;
 }
 
@@ -29,4 +30,4 @@ export interface PostFields {
   date: Date;
 }
 
-export type PostModel = Model<PostFields,{},{}>
+export type PostModel = Model<PostFields, {}, {}>
