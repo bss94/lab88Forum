@@ -1,5 +1,5 @@
 import Grid from '@mui/material/Grid2';
-import {CircularProgress, Grow, Paper, Typography} from '@mui/material';
+import {Alert, CircularProgress, Grow, Paper, Typography} from '@mui/material';
 import PostItem from './components/PostItem.tsx';
 import {useAppDispatch, useAppSelector} from '../../app/hooks.ts';
 import {selectFetchingPosts, selectPosts} from './postsSlice.ts';
@@ -43,6 +43,13 @@ const Posts = () => {
           </Grid>
         );
       })}
+      {posts.length === 0 && !fetching && (
+        <Grid size={12}>
+          <Alert severity="info" sx={{my: 3}}>
+            Not posted yet!
+          </Alert>
+        </Grid>
+      )}
     </Grid>
   );
 };
